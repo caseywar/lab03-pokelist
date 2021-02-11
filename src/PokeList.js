@@ -11,9 +11,6 @@ export default class PokeList extends Component {
                     <PokeItem
                         key={pokeObject.pokemon}
                         pokemomItemProp={pokeObject}
-                    // name={pokeItem.pokemon}
-                    // picture={PokeItem.url_image}
-                    // type={PokeItem.type_1} />)
                     />)}
             </ul>
         )
