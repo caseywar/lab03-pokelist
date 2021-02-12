@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import pokemon from './pokemon.js'
 import PokeItem from './PokeItem.js'
 
 
@@ -15,18 +14,22 @@ export default class PokeList extends Component {
         });
     }
     render() {
-        const filteredPokemon = this.state.pokemon.filter(pokemon => pokemon.pokemon.includes(this.state.query))
-        return (
+        const filteredPokemon = this.props.pokemon.filter(pokemon => pokemon.pokemon.includes(this.state.query))
 
-            < ul className='list' >
-                {
-                    pokemon.map(pokeObject =>
-                        <PokeItem
-                            key={pokeObject.pokemon}
-                            pokemomItemProp={pokeObject}
-                        />)
-                }
-            </ul >
+        return (
+            <>
+                <input onChange={this.handleInputChange} />
+
+                <ul className='list' >
+                    {
+                        filteredPokemon.map(pokeObject =>
+                            <PokeItem
+                                key={pokeObject.pokemon}
+                                pokemomItemProp={pokeObject}
+                            />)
+                    }
+                </ul>
+            </>
         )
     }
 }
