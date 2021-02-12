@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './Header'
-import SearchPage from './PokeList.js'
+import SearchPage from './SearchPage.js'
 import HomePage from './HomePage.js'
 import {
   BrowserRouter as Router,
@@ -28,7 +28,7 @@ function App() {
           {/* <SearchPage /> */}
         </Switch>
       </Router>
-    </div >
+    </div>
   );
 }
 
