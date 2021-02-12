@@ -25,10 +25,11 @@ function App() {
             exact
             render={(routerProps) => <SearchPage {...routerProps} />}
           />
+          hello helloooo
           {/* <SearchPage /> */}
         </Switch>
       </Router>
-    </div >
+    </div>
   );
 }
 
