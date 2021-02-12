@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 export default class Header extends Component {
@@ -17,6 +17,7 @@ export default class Header extends Component {
                         Search
                 </NavLink>
                 } */}
+
                 {/* {
                     this.props.location.pathname === '/search' && <a href="https://www.pokemon.com/us/pokedex/">Official Pokedex™ Website </a>
                 } */}
