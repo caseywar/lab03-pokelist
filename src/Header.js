@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
+
 
 export default class Header extends Component {
     render() {
         return (
-            <div>
-                hello moto
-            
+            <header>
+                <NavLink exact activeClassName="selected" to="/">
+                    Home
+            </NavLink>
+                <NavLink exact activeClassName="selected" to="/search">
+                    Search Page
+            </NavLink>
+                {/* {
+                    this.props.location.pathname !== '/search' && <NavLink exact activeClassName="selected" to="/search">
+                        Search
+                </NavLink>
+                } */}
 
-            </div>
+                {/* {
+                    this.props.location.pathname === '/search' && <a href="https://www.pokemon.com/us/pokedex/">Official Pokedex™ Website </a>
+                } */}
+            </header>
         )
     }
 }
