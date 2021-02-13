@@ -52,20 +52,24 @@ export default class SearchPage extends Component {
 
 
         return (
-            <form>
+            <>
 
-                <div>
-                    <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleDirectionSort} options={['Ascend', 'Descend']} />
-                    <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleSortBy} options={['pokemon', 'type_1']} />
-                </div>
+                <main className="searchMain">
+                    <form className="sidebar">
+                        <div>
+                            <span className="searchTitle">Search Pokemon</span>
+
+                            <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleDirectionSort} options={['Ascend', 'Descend']} />
+                            <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleSortBy} options={['Name', 'type_1']} />
+                        </div>
 
 
-                <input onChange={this.handleInputChange} />
-                Search Pokemon
+                        <input onChange={this.handleInputChange} />
+                    </form>
+                    <PokeList filteredPokemon={filteredPokemon} />
+                </main>
 
-
-                <PokeList filteredPokemon={filteredPokemon} />
-            </form>
+            </>
         )
     }
 }

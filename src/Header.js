@@ -7,11 +7,12 @@ export default class Header extends Component {
         return (
             <header>
                 <NavLink exact activeClassName="selected" to="/">
-                    Home
+                    HOME
             </NavLink>
+                <br></br>
                 <NavLink exact activeClassName="selected" to="/search">
-                    Search Page
-            </NavLink>
+                    SEARCHPAGE
+                </NavLink>
                 {/* {
                     this.props.location.pathname !== '/search' && <NavLink exact activeClassName="selected" to="/search">
                         Search

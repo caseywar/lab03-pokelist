@@ -19,7 +19,6 @@ function App() {
             exact
             render={(routerProps) => <HomePage {...routerProps} />}
           />
-
           <Route
             path="/search"
             exact
