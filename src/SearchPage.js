@@ -60,7 +60,7 @@ export default class SearchPage extends Component {
                             <span className="searchTitle">Search Pokemon</span>
 
                             <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleDirectionSort} options={['Ascend', 'Descend']} />
-                            <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleSortBy} options={['Name', 'type_1']} />
+                            <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleSortBy} options={['Name', 'type_1', 'shape', 'ability_1']} />
                         </div>
 
 
