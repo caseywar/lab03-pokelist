@@ -3,33 +3,26 @@ import PokeItem from './PokeItem.js'
 
 
 export default class PokeList extends Component {
-    state = {
-        pokemon: [],
-        query: '',
-    }
 
-    handleInputChange = (e) => {
-        this.setState({
-            query: e.target.value,
-        });
-    }
+
+
     render() {
-        const filteredPokemon = this.props.pokemon.filter(pokemon => pokemon.pokemon.includes(this.state.query))
+
 
         return (
-            <>
-                <input onChange={this.handleInputChange} />
+            <div>
+
 
                 <ul className='list' >
                     {
-                        filteredPokemon.map(pokeObject =>
+                        this.props.filteredPokemon.map(pokeObject =>
                             <PokeItem
                                 key={pokeObject.pokemon}
                                 pokemomItemProp={pokeObject}
                             />)
                     }
                 </ul>
-            </>
+            </div>
         )
     }
 }
