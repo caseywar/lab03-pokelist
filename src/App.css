@@ -32,7 +32,7 @@ img {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  background-color: rgb(165, 40, 40);
+  background-color: rgb(202, 63, 63);
 
 }
 
@@ -55,7 +55,7 @@ aside {
 
 header {
   text-align: center;
-  background-color: rgb(162, 196, 111);
+  background-color: #cea905;;
   height: 50px;
   border-bottom: dotted 3px black;
   font-family: 'Truculenta', sans-serif;
