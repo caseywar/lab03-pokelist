@@ -28,7 +28,7 @@ export default class SearchPage extends Component {
 
         this.setState({
             loading: false,
-            // pokemonData: data.body.results,
+            pokemonData: data.body.results,
         });
     }
 
