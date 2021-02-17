@@ -9,6 +9,11 @@ img {
   width: 100px;
 }
 
+.newList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .list {
   list-style: none;
   display: grid;
