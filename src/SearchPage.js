@@ -78,14 +78,12 @@ export default class SearchPage extends Component {
                     <div className="sidebar">
                         <div>
                             <label>
-                                Search
-                                    <input onChange={this.handleInputChange} />
+                                <span className="searchTitle">Search Pokemon</span>
+
+                                <input onChange={this.handleInputChange} />
+                                <button onClick={this.handleClick}>Search</button>
+
                             </label>
-
-
-
-
-                            <span className="searchTitle">Search Pokemon</span>
 
                             {/* <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleDirectionSort} options={['Ascend', 'Descend']} />
                             <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleSortBy} options={['Name', 'type_1', 'shape', 'ability_1']} /> */}
@@ -94,8 +92,6 @@ export default class SearchPage extends Component {
 
 
                     <div>
-
-                        <button onClick={this.handleClick}>Search</button>
                         {
                             this.state.pokemon.map(poke =>
 
