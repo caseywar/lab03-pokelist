@@ -4,6 +4,7 @@ import pokemon from './pokemon.js'
 import './App.css';
 // import Dropdown from './Dropdown.js'
 import request from 'superagent';
+import Spinner from './Spinner.js'
 
 
 
@@ -11,6 +12,7 @@ export default class SearchPage extends Component {
     state = {
         pokemon: [],
         query: '',
+        loading: false,
         // sortBy: 'pokemon',
         // sortOrder: 'Ascend'
     }
@@ -20,9 +22,12 @@ export default class SearchPage extends Component {
     }
 
     fetchPokemon = async () => {
+        this.setState({ loading: true });
+
         const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}`);
 
         this.setState({
+            loading: false,
             pokemon: data.body.results,
         });
     }
@@ -93,14 +98,16 @@ export default class SearchPage extends Component {
 
                     <div>
                         {
-                            this.state.pokemon.map(poke =>
+                            this.state.loading
+                                ? <Spinner />
+                                : this.state.pokemon.map(poke =>
 
-                                <div key={pokemon.pokemon}>
-                                    <div>
-                                        <img src={poke.url_image} alt="poke" />
-                                    </div>
-                                    {poke.pokemon} :{poke.type_1}
-                                </div>)
+                                    <div key={pokemon.pokemon}>
+                                        <div>
+                                            <img src={poke.url_image} alt="poke" />
+                                        </div>
+                                        {poke.pokemon} :{poke.type_1}
+                                    </div>)
                         }
                     </div>
 
