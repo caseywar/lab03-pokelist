@@ -28,31 +28,31 @@ export default class DetailPage extends Component {
                 {
                     this.state.loading
                         ? <Spinner />
-                        : <div>
+                        : <div className="pokemonDetails">
                             <img src={this.state.pokemonData.url_image} alt="pokemon" />
                             <p>
-                                {this.state.pokemonData.pokemon}
+                                <span className="detailsCategory">Name:</span> {this.state.pokemonData.pokemon}
                             </p>
                             <p>
-                                {this.state.pokemonData.attack}
+                                <span className="detailsCategory">Attack:</span> {this.state.pokemonData.attack}
                             </p>
                             <p>
-                                {this.state.pokemonData.defense}
+                                <span className="detailsCategory">Defense:</span> {this.state.pokemonData.defense}
                             </p>
                             <p>
-                                {this.state.pokemonData.type_1}
+                                <span className="detailsCategory">Type 1:</span> {this.state.pokemonData.type_1}
                             </p>
                             <p>
-                                {this.state.pokemonData.type_2}
+                                <span className="detailsCategory">Type 2:</span> {this.state.pokemonData.type_2}
                             </p>
                             <p>
-                                {this.state.pokemonData.shape}
+                                <span className="detailsCategory">Shape:</span> {this.state.pokemonData.shape}
                             </p>
                             <p>
-                                {this.state.pokemonData.ability_1}
+                                <span className="detailsCategory">Ability 1:</span> {this.state.pokemonData.ability_1}
                             </p>
                             <p>
-                                {this.state.pokemonData.ability_2}
+                                <span className="detailsCategory">Ability 2:</span> {this.state.pokemonData.ability_2}
                             </p>
                         </div>
                 }
