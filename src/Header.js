@@ -10,7 +10,7 @@ export default class Header extends Component {
                     HOME
             </NavLink>
                 <br></br>
-                <NavLink exact activeClassName="selected" to="/search">
+                <NavLink exact activeClassName="selected" to="/pokemon">
                     SEARCHPAGE
                 </NavLink>
                 {/* {

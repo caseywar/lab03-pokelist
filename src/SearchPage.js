@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-// import PokeList from './PokeList.js'
-import pokemon from './pokemon.js'
+import PokeList from './PokeList.js'
 import './App.css';
 import Dropdown from './Dropdown.js'
 import request from 'superagent';
@@ -10,11 +9,14 @@ import Spinner from './Spinner.js'
 
 export default class SearchPage extends Component {
     state = {
-        pokemon: [],
+        pokemonData: [],
+        totalPokemon: 0,
+        perPage: 10,
         query: '',
         loading: false,
         sortBy: 'pokemon',
-        sortOrder: 'asc'
+        sortOrder: 'asc',
+        currentPage: 1,
     }
 
     componentDidMount = async () => {
@@ -22,8 +24,22 @@ export default class SearchPage extends Component {
     }
 
 
+    fetchPokemon = async () => {
+        this.setState({ loading: true });
+
+        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&direction=${this.state.sortOrder}&sort=${this.state.sortBy}&page=${this.state.currentPage}&perPage=${this.state.perPage}`);
+
+        this.setState({
+            loading: false,
+            pokemonData: data.body.results,
+            totalPokemon: data.body.count
+        });
+    }
+
 
     handleClick = async () => {
+        await this.setState({ currentPage: 1 });
+
         await this.fetchPokemon();
     }
 
@@ -49,38 +65,34 @@ export default class SearchPage extends Component {
         });
     }
 
+    handlePerPage = (e) => {
+        this.setState({ perPage: e.target.value })
+    }
 
-    fetchPokemon = async () => {
-        this.setState({ loading: true });
 
-        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&direction=${this.state.sortOrder}&sort=${this.state.sortBy}`);
-
-        console.log(data.body.results, 'fetch data')
-
-        this.setState({
-            loading: false,
-            pokemon: data.body.results,
+    handleNextClick = async () => {
+        await this.setState({
+            currentPage: this.state.currentPage + 1
         });
+
+        await this.fetchPokemon();
+    }
+
+    handlePreviousClick = async () => {
+        await this.setState({
+            currentPage: this.state.currentPage - 1
+        });
+        await this.fetchPokemon();
     }
 
 
     render() {
-        // if (this.state.sortOrder === 'asc') {
-        //     pokemon.sort(
-        //         (a, b) =>
-        //             a[this.state.sortBy].localeCompare(b[this.state.sortBy])
-        //     );
-        // }
-        // if (this.state.sortOrder === 'desc') {
-        //     pokemon.sort(
-        //         (a, b) =>
-        //             b[this.state.sortBy].localeCompare(a[this.state.sortBy])
-        //     );
-        // }
+        const {
+            pokemonData,
+            loading,
+        } = this.state;
 
-
-        // const filteredPokemon = pokemon.filter(pokemon => pokemon.pokemon.includes(this.state.query))
-
+        const lastPage = Math.ceil(this.state.totalPokemon / this.state.perPage);
 
         return (
             <>
@@ -92,27 +104,35 @@ export default class SearchPage extends Component {
                                 <span className="searchTitle">Search Pokemon</span>
 
                                 <input onChange={this.handleInputChange} />
+                                <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleDirectionSort} options={['asc', 'desc']} />
+                                <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleSortBy} options={['pokemon', 'type_1', 'shape', 'ability_1']} />
+
+                                <span className="searchTitle">Results per page:</span>
+                                <select onChange={this.handlePerPage}>
+                                    <option value={10}>10</option>
+                                    <option value={50}>50</option>
+                                    <option value={75}>75</option>
+                                    <option value={100}>100</option>
+                                </select>
+
+
                                 <button onClick={this.handleClick}>Search</button>
+
+                                <h3> Page{this.state.currentPage}</h3>
+                                <button onClick={this.handlePreviousClick} disabled={this.state.currentPage === 1}>Previous</button>
+
+                                <button onClick={this.handleNextClick} disabled={this.state.currentPage === lastPage}>Next</button>
                             </label>
 
-                            <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleDirectionSort} options={['asc', 'desc']} />
-                            <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleSortBy} options={['pokemon', 'type_1', 'shape', 'ability_1']} />
+
                         </div>
                     </div>
 
 
-                    <div>
-                        {
-                            this.state.loading
-                                ? <Spinner />
-                                : this.state.pokemon.map(poke =>
-
-                                    <div key={pokemon.pokemon}>
-                                        <div>
-                                            <img src={poke.url_image} alt="poke" />
-                                        </div>
-                                        {poke.pokemon} :{poke.type_1}
-                                    </div>)
+                    <div className="newList">
+                        {loading
+                            ? <Spinner />
+                            : <PokeList pokemonData={pokemonData} />
                         }
                     </div>
 

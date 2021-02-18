@@ -7,6 +7,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import DetailPage from './DetailPage.js'
+
 
 function App() {
   return (
@@ -17,14 +19,19 @@ function App() {
           <Route
             path="/"
             exact
-            render={(routerProps) => <HomePage {...routerProps} />}
+            component={HomePage}
+
           />
           <Route
-            path="/search"
+            path="/pokemon"
             exact
-            render={(routerProps) => <SearchPage {...routerProps} />}
+            component={SearchPage}
           />
-          {/* <SearchPage /> */}
+          <Route
+            path="/pokemon/:pokemonName"
+            exact
+            component={DetailPage}
+          />
         </Switch>
       </Router>
     </div>
