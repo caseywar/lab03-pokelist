@@ -13,7 +13,8 @@ export default class SearchPage extends Component {
         query: '',
         loading: false,
         sortBy: 'pokemon',
-        sortOrder: 'asc'
+        sortOrder: 'asc',
+        currentPage: 1,
     }
 
     componentDidMount = async () => {
@@ -24,7 +25,7 @@ export default class SearchPage extends Component {
     fetchPokemon = async () => {
         this.setState({ loading: true });
 
-        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&direction=${this.state.sortOrder}&sort=${this.state.sortBy}`);
+        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&direction=${this.state.sortOrder}&sort=${this.state.sortBy}&page=${this.state.currentPage}&perPage=50`);
 
         this.setState({
             loading: false,
@@ -60,6 +61,20 @@ export default class SearchPage extends Component {
     }
 
 
+    handleNextClick = async () => {
+        await this.setState({
+            currentPage: this.state.currentPage + 1
+        });
+
+        await this.fetchPokemon();
+    }
+
+    handlePreviousClick = async () => {
+        await this.setState({
+            currentPage: this.state.currentPage - 1
+        });
+        await this.fetchPokemon();
+    }
 
 
     render() {
@@ -80,6 +95,10 @@ export default class SearchPage extends Component {
                                 <input onChange={this.handleInputChange} />
 
                                 <button onClick={this.handleClick}>Search</button>
+
+                                <h3> Page{this.state.currentPage}</h3>
+                                <button onClick={this.handlePreviousClick}>Previous</button>
+                                <button onClick={this.handleNextClick}>Next</button>
                             </label>
 
                             <Dropdown currentValue={this.state.sortOrder} handleChanges={this.handleDirectionSort} options={['asc', 'desc']} />
